@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "Components/SplineComponent.h"
 #include "InputActionValue.h"
 #include "Characters/CharacterBase.h"
 
@@ -16,13 +15,6 @@ enum class EWalkingSubMovementMode : uint8
 {
 	None,
 	Wading
-};
-
-UENUM(BlueprintType)
-enum class EFlyingSubMovementMode : uint8
-{
-	None,
-	Climbing
 };
 
 class AWeapon;
@@ -42,6 +34,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	virtual void PostInitializeComponents() override;
+
 	virtual void Landed(const FHitResult& Hit) override;
 
 	virtual void NotifyJumpApex() override;
@@ -54,24 +48,15 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RotateYawTo(FVector Point);
 
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void EnableClimbingMode();
-
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void DisableClimbingMode();
-
-	UFUNCTION(BlueprintCallable)
-	bool GetClimbingModeEnabled() const;
-
 	UFUNCTION(BlueprintImplementableEvent)
 	void AttackUse();
 
 	UFUNCTION(BlueprintCallable)
 	void Attack();
 
-	void Move(FVector ForwardDirection, FVector RightDirection, FVector2D MovementVector);
+	void OnMoveInput(const FInputActionValue& Value);
 
-	void StopMovement();
+	void Move(FVector ForwardDirection, FVector RightDirection, FVector2D MovementVector);
 
 	UFUNCTION(BlueprintCallable)
 	bool IsWading() const;
@@ -92,13 +77,6 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent, Meta = (DisplayName = "OnWadingJump"))
 	void ReceiveOnWadingJump();
 
-	void Walk(FVector ForwardDirection, FVector RightDirection, FVector2D MovementVector);
-
-	void Climb(FVector2D Direction);
-
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void RotateFaceToClimbHang();
-
 private:
 	// In the original Shrek 2 game player character has roll to movement direction on falling
 	void AddRollOnFalling(const float& DeltaTime);
@@ -107,11 +85,11 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<class APlayerControllerBase> PlayerController;
 	
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Movement)
-	EWalkingSubMovementMode WalkingSubMovementMode;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	class UClimbingComponent* ClimbingComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Movement)
-	EFlyingSubMovementMode FlyingSubMovementMode;
+	EWalkingSubMovementMode WalkingSubMovementMode;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement)
 	float FallingCurrentRollSpeed;
@@ -133,12 +111,6 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement)
 	int MaxWadeSpeed = 300;
-
-	UPROPERTY(BlueprintReadWrite, Category = Climbing)
-	TObjectPtr<USplineComponent> ClimbingSpline;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Climbing)
-	float HangClimbingSpeed = 3;
 
 	/*
 	* Uses to stop jump ability after reach jump apex

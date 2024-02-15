@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
-#include "Engine/DataAsset.h"
 #include "InputConfig.generated.h"
 
 class UInputAction;

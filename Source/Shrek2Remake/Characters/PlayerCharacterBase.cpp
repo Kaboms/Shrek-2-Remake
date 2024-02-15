@@ -5,6 +5,8 @@
 #include "Core/PlayerControllerBase.h"
 #include "Weapons/Weapon.h"
 #include "Components/FightComponent.h"
+#include "Components/ClimbingComponent.h"
+#include "EnhancedInputComponent.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -44,9 +46,56 @@ APlayerCharacterBase::APlayerCharacterBase()
 	bJumpApexReached = false;
 }
 
-bool APlayerCharacterBase::GetClimbingModeEnabled() const
+void APlayerCharacterBase::BeginPlay()
 {
-	return GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Flying && FlyingSubMovementMode == EFlyingSubMovementMode::Climbing;
+	Super::BeginPlay();
+
+	if (PlayerController->PlayerCameraManager)
+	{
+		// Limit camera rotation
+		PlayerController->PlayerCameraManager->ViewPitchMin = -80;
+		PlayerController->PlayerCameraManager->ViewPitchMax = 45;
+	}
+}
+
+void APlayerCharacterBase::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	AddRollOnFalling(DeltaTime);
+}
+
+void APlayerCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent))
+	{
+		PlayerController = Cast<APlayerControllerBase>(Controller);
+
+		UInputConfig* InputConfig = PlayerController->GetInputConfig();
+
+		//Jumping
+		EnhancedInputComponent->BindAction(InputConfig->JumpInputAction, ETriggerEvent::Triggered, this, &APlayerCharacterBase::Jump);
+		EnhancedInputComponent->BindAction(InputConfig->JumpInputAction, ETriggerEvent::Completed, this, &APlayerCharacterBase::StopJumping);
+
+		//Moving
+		EnhancedInputComponent->BindAction(InputConfig->MoveInputAction, ETriggerEvent::Triggered, this, &APlayerCharacterBase::OnMoveInput);
+
+		//Attack/Use
+		EnhancedInputComponent->BindAction(InputConfig->AttackUseInputAction, ETriggerEvent::Started, this, &APlayerCharacterBase::AttackUse);
+	}
+}
+
+void APlayerCharacterBase::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+
+	UActorComponent* FindedClimbingComponent = GetComponentByClass(UClimbingComponent::StaticClass());
+	if (IsValid(FindedClimbingComponent))
+	{
+		ClimbingComponent = Cast<UClimbingComponent>(FindedClimbingComponent);
+	}
 }
 
 void APlayerCharacterBase::Attack()
@@ -64,38 +113,33 @@ void APlayerCharacterBase::Attack()
 	}
 }
 
+void APlayerCharacterBase::OnMoveInput(const FInputActionValue& Value)
+{
+	// Input is a Vector2D
+	FVector2D MovementVector = Value.Get<FVector2D>();
+
+	const FRotator Rotation = GetControlRotation();
+	const FRotator YawRotation(0, Rotation.Yaw, 0);
+
+	// Get forward vector
+	const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+
+	// Get right vector 
+	const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+
+	Move(ForwardDirection, RightDirection, MovementVector);
+}
+
 void APlayerCharacterBase::Move(FVector ForwardDirection, FVector RightDirection, FVector2D MovementVector)
 {
 	if (bStuned)
 		return;
 
-	if (GetClimbingModeEnabled())
+	if (IsValid(ClimbingComponent) && ClimbingComponent->CanHandleMovement())
 	{
-		Climb(MovementVector);
-	}
-	else
-	{
-		Walk(ForwardDirection, RightDirection, MovementVector);
-	}
-}
-
-void APlayerCharacterBase::StopMovement()
-{
-	if (GetClimbingModeEnabled())
-	{
-		GetMovementComponent()->StopMovementImmediately();
-	}
-}
-
-bool APlayerCharacterBase::IsWading() const
-{
-	return GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Walking && WalkingSubMovementMode == EWalkingSubMovementMode::Wading;
-}
-
-void APlayerCharacterBase::Walk(FVector ForwardDirection, FVector RightDirection, FVector2D MovementVector)
-{
-	if (bStuned)
+		// Input handled by climbing component
 		return;
+	}
 
 	if (!GetIsAttack())
 	{
@@ -105,15 +149,15 @@ void APlayerCharacterBase::Walk(FVector ForwardDirection, FVector RightDirection
 	}
 }
 
+bool APlayerCharacterBase::IsWading() const
+{
+	return GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Walking && WalkingSubMovementMode == EWalkingSubMovementMode::Wading;
+}
+
 void APlayerCharacterBase::Jump()
 {
 	if (bStuned)
 		return;
-
-	if (GetClimbingModeEnabled())
-	{
-		DisableClimbingMode();
-	}
 
 	if (IsWading())
 	{
@@ -121,28 +165,6 @@ void APlayerCharacterBase::Jump()
 	}
 
 	Super::Jump();
-}
-
-void APlayerCharacterBase::BeginPlay()
-{
-	Super::BeginPlay();
-
-	if (PlayerController = Cast<APlayerControllerBase>(Controller))
-	{
-		if (PlayerController->PlayerCameraManager)
-		{
-			// Limit camera rotation
-			PlayerController->PlayerCameraManager->ViewPitchMin = -80;
-			PlayerController->PlayerCameraManager->ViewPitchMax = 45;
-		}
-	}
-}
-
-void APlayerCharacterBase::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-	AddRollOnFalling(DeltaTime);
 }
 
 void APlayerCharacterBase::AddRollOnFalling(const float& DeltaTime)
@@ -191,11 +213,6 @@ void APlayerCharacterBase::AddRollOnFalling(const float& DeltaTime)
 	}
 }
 
-void APlayerCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
-{
-	Super::SetupPlayerInputComponent(PlayerInputComponent);
-}
-
 void APlayerCharacterBase::Landed(const FHitResult& Hit)
 {
 	Super::Landed(Hit);
@@ -239,37 +256,6 @@ void APlayerCharacterBase::RotateYawTo(FVector Point)
 	FRotator Rotation = GetActorRotation();
 	Rotation.Yaw = FRotationMatrix::MakeFromX(Point - GetActorLocation()).Rotator().Yaw;
 	SetActorRotation(Rotation);
-}
-
-void APlayerCharacterBase::Climb(FVector2D Direction)
-{
-	if (IsValid(ClimbingSpline))
-	{
-		const FRotator Rotation = GetActorRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-
-		FVector RightVector = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-		RightVector *= Direction.X;
-
-		float SplineInputKey = ClimbingSpline->FindInputKeyClosestToWorldLocation(GetActorLocation());
-		float ActorDistance = ClimbingSpline->GetDistanceAlongSplineAtSplineInputKey(SplineInputKey);
-
-		FVector StartLocation = ClimbingSpline->GetLocationAtDistanceAlongSpline(ActorDistance, ESplineCoordinateSpace::Type::World);
-		FVector NewLocation = ClimbingSpline->GetLocationAtDistanceAlongSpline(ActorDistance + (100 * Direction.X), ESplineCoordinateSpace::Type::World);
-
-		FVector MoveDirection = NewLocation - StartLocation;
-		if (MoveDirection.Length() > 50 && !MoveDirection.IsNearlyZero(0.1))
-		{
-			MoveDirection.Normalize();
-			AddMovementInput(MoveDirection, HangClimbingSpeed);
-		}
-		else
-		{
-			GetMovementComponent()->StopMovementImmediately();
-		}
-
-		RotateFaceToClimbHang();
-	}
 }
 
 bool APlayerCharacterBase::CanJumpInternal_Implementation() const

@@ -16,19 +16,13 @@ class SHREK2REMAKE_API APlayerControllerBase : public APlayerController
 {
 	GENERATED_BODY()
 
+public:
+	UFUNCTION(BlueprintGetter)
+	UInputConfig* GetInputConfig();
+
 protected:
-	// Called for movement input
-	void Move(const FInputActionValue& Value);
-
-	void StopMove(const FInputActionValue& Value);
-
 	// Called for looking input
 	void Look(const FInputActionValue& Value);
-
-	void Jump();
-	void StopJumping();
-
-	void AttackUse(const FInputActionValue& Value);
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void ShowMainMenu(const FInputActionValue& Value);
@@ -42,6 +36,6 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Input)
 	TObjectPtr<class UInputMappingContext> DefaultMappingContextGamepad;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Input)
+	UPROPERTY(EditDefaultsOnly, BlueprintGetter = GetInputConfig, Category = Input)
 	TObjectPtr<UInputConfig> InputConfig;
 };

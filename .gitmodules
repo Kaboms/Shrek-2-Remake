@@ -1,0 +1,3 @@
+[submodule "Plugins/ClimbingSystem"]
+	path = Plugins/ClimbingSystem
+	url = https://github.com/Kaboms/UE-Climbing-System.git
