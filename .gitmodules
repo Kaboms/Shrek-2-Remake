@@ -1,3 +1,6 @@
 [submodule "Plugins/ClimbingSystem"]
 	path = Plugins/ClimbingSystem
 	url = https://github.com/Kaboms/UE-Climbing-System.git
+[submodule "Plugins/GameInstanceServices"]
+	path = Plugins/GameInstanceServices
+	url = https://github.com/Kaboms/UE-ServicesSubsystem.git

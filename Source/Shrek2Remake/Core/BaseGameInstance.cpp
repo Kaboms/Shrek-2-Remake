@@ -10,7 +10,10 @@ UBaseGameInstance* UBaseGameInstance::GetBaseGameInstance(const UObject* WorldCo
     return Cast<UBaseGameInstance>(UGameplayStatics::GetGameInstance(WorldContextObject));
 }
 
-void UBaseGameInstance::CheckActorDestroyed(AActor* Actor, ECheckActorDestroyed& Branches)
+UBaseGameInstance* UBaseGameInstance::GetGameInstanceByClass(const UObject* WorldContextObject, TSubclassOf<UBaseGameInstance> GameInstanceClass)
 {
-    Branches = ReceiveCheckActorDestroyed(Actor) ? ECheckActorDestroyed::Destroyed : ECheckActorDestroyed::Exist;
+    UBaseGameInstance* BaseGameInstance = GetBaseGameInstance(WorldContextObject);
+    ensure(BaseGameInstance->GetClass() == GameInstanceClass);
+
+    return BaseGameInstance;
 }

@@ -27,13 +27,7 @@ public:
 	UFUNCTION(BlueprintPure, Category = "Game", meta = (WorldContext = "WorldContextObject"))
 	static class UBaseGameInstance* GetBaseGameInstance(const UObject* WorldContextObject);
 
-	UFUNCTION(BlueprintCallable, Meta = (ExpandEnumAsExecs = "Branches"))
-	void CheckActorDestroyed(AActor* Actor, ECheckActorDestroyed& Branches);
-
-	UFUNCTION(BlueprintImplementableEvent, BlueprintCallable)
-	void AddToDestroyed(AActor* Actor);
-
-protected:
-	UFUNCTION(BlueprintImplementableEvent, Meta = (DisplayName = "Check Actor Destroyed"))
-	bool ReceiveCheckActorDestroyed(AActor* Actor);
+	/** Returns the game instance object  */
+	UFUNCTION(BlueprintPure, Category = "Game", meta = (WorldContext = "WorldContextObject", DeterminesOutputType = "GameInstanceClass"))
+	static class UBaseGameInstance* GetGameInstanceByClass(const UObject* WorldContextObject, TSubclassOf<UBaseGameInstance> GameInstanceClass);
 };
