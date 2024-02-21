@@ -8,7 +8,7 @@ public class Shrek2Remake : ModuleRules
     {
         PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "ClimbingSystem" });
+        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "ClimbingSystem", "GameInstanceServices" });
 
         PrivateDependencyModuleNames.AddRange(new string[]
         {
