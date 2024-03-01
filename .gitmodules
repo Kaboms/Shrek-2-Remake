@@ -4,3 +4,6 @@
 [submodule "Plugins/GameInstanceServices"]
 	path = Plugins/GameInstanceServices
 	url = https://github.com/Kaboms/UE-ServicesSubsystem.git
+[submodule "Plugins/CombatSystem"]
+	path = Plugins/CombatSystem
+	url = https://github.com/Kaboms/UE-CombatSystem.git

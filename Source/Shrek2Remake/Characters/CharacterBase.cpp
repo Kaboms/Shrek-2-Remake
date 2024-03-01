@@ -2,7 +2,7 @@
 
 
 #include "Characters/CharacterBase.h"
-#include "Components/FightComponent.h"
+#include "CombatComponent.h"
 #include "Core/GameplayTagsNative.h"
 
 #include "Kismet/KismetMathLibrary.h"
@@ -43,36 +43,20 @@ void ACharacterBase::PostInitializeComponents()
 {
 	Super::PostInitializeComponents();
 
-	UActorComponent* FindedFightComponent = GetComponentByClass(UFightComponent::StaticClass());
-	if (IsValid(FindedFightComponent))
+	UActorComponent* FindedCombatComponent = GetComponentByClass(UCombatComponent::StaticClass());
+	if (IsValid(FindedCombatComponent))
 	{
-		FightComponent = Cast<UFightComponent>(FindedFightComponent);
+		CombatComponent = Cast<UCombatComponent>(FindedCombatComponent);
 	}
 }
 
 bool ACharacterBase::GetIsAttack() const
 {
-	if (IsValid(FightComponent))
+	if (IsValid(CombatComponent))
 	{
-		return FightComponent->bIsAttack;
+		return CombatComponent->bIsAttack;
 	}
 	return false;
-}
-
-void ACharacterBase::OnMovementModeChanged(EMovementMode PrevMovementMode, uint8 PreviousCustomMode)
-{
-	Super::OnMovementModeChanged(PrevMovementMode, PreviousCustomMode);
-
-	if (IsValid(FightComponent))
-	{
-		FightComponent->InterruptAttack();
-	}
-}
-
-void ACharacterBase::SetStuned(bool bInStuned)
-{
-	bStuned = bInStuned;
-	ReceiveOnStuned(bStuned);
 }
 
 UAnimMontage* ACharacterBase::FindTagedMontage(TArray<FTagedAnimMontage>& Montages, FGameplayTagContainer MontageTags, UAnimMontage* DefaultMontage)
@@ -91,6 +75,30 @@ UAnimMontage* ACharacterBase::FindTagedMontage(TArray<FTagedAnimMontage>& Montag
 	return DefaultMontage;
 }
 
+void ACharacterBase::OnMovementModeChanged(EMovementMode PrevMovementMode, uint8 PreviousCustomMode)
+{
+	Super::OnMovementModeChanged(PrevMovementMode, PreviousCustomMode);
+
+	if (IsValid(CombatComponent))
+	{
+		CombatComponent->InterruptAttack();
+	}
+}
+
+bool ACharacterBase::GetIsStunned()
+{
+	return bStunned;
+}
+
+void ACharacterBase::SetStunned(bool bInStunned)
+{
+	bStunned = bInStunned;
+
+	ReceiveOnStunned(bStunned);
+
+	OnStunned.Broadcast(bStunned);
+}
+
 void ACharacterBase::OnPlayMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
 {
 	if (NotifyName == FName(TEXT("DeathEnded")))
@@ -101,14 +109,14 @@ void ACharacterBase::OnPlayMontageNotifyBegin(FName NotifyName, const FBranching
 
 void ACharacterBase::OnDamageReceived(UHealthComponent* InHealthComponent, FDamageInfo DamageInfo)
 {
-	if (IsValid(FightComponent))
+	if (IsValid(CombatComponent))
 	{
-		FightComponent->InterruptAttack();
+		CombatComponent->InterruptAttack();
 	}
 
 	if (HealthComponent->IsAlive())
 	{
-		SetStuned(true);
+		SetStunned(true);
 
 		if (!DamageInfo.ImpactPoint.IsZero())
 		{
@@ -128,7 +136,7 @@ void ACharacterBase::OnDamageReceived(UHealthComponent* InHealthComponent, FDama
 		OnMontageEndedDelegate.BindLambda([this](UAnimMontage* AnimMontage, bool bInterrupted)
 			{
 				if (HealthComponent->IsAlive())
-					SetStuned(false);
+					SetStunned(false);
 			});
 
 		if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
@@ -150,8 +158,9 @@ void ACharacterBase::OnDied(UHealthComponent* InHealthComponent, FDamageInfo Las
 		AnimInstance->Montage_Play(MontageToPlay);
 	}
 
-	AttackEnabled = false;
-	SetStuned(true);
+	CombatComponent->bEnabled = false;
+
+	SetStunned(true);
 
 	ReceiveOnDied(InHealthComponent, LastDamageInfo);
 }

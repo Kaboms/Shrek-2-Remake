@@ -4,7 +4,6 @@
 #include "Characters/PlayerCharacterBase.h"
 #include "Core/PlayerControllerBase.h"
 #include "Weapons/Weapon.h"
-#include "Components/FightComponent.h"
 #include "Components/ClimbingComponent.h"
 #include "EnhancedInputComponent.h"
 
@@ -100,7 +99,7 @@ void APlayerCharacterBase::PostInitializeComponents()
 
 void APlayerCharacterBase::Attack()
 {
-	if (bStuned || !AttackEnabled)
+	if (bStunned)
 		return;
 
 	if (GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Walking
@@ -132,7 +131,7 @@ void APlayerCharacterBase::OnMoveInput(const FInputActionValue& Value)
 
 void APlayerCharacterBase::Move(FVector ForwardDirection, FVector RightDirection, FVector2D MovementVector)
 {
-	if (bStuned)
+	if (bStunned)
 		return;
 
 	if (IsValid(ClimbingComponent) && ClimbingComponent->CanHandleMovement())
@@ -156,7 +155,7 @@ bool APlayerCharacterBase::IsWading() const
 
 void APlayerCharacterBase::Jump()
 {
-	if (bStuned)
+	if (bStunned)
 		return;
 
 	if (IsWading())

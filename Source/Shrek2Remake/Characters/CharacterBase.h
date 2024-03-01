@@ -12,6 +12,8 @@
 
 class UFightComponent;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FStunnedSignature, bool, IsStunned);
+
 UCLASS()
 class SHREK2REMAKE_API ACharacterBase : public ACharacter
 {
@@ -31,18 +33,21 @@ public:
 
 	virtual void PostInitializeComponents() override;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintPure)
 	bool GetIsAttack() const;
 
 	virtual void OnMovementModeChanged(EMovementMode PrevMovementMode, uint8 PreviousCustomMode = 0);
-
-	UFUNCTION(BlueprintCallable)
-	void SetStuned(bool bInStuned);
 
 	UFUNCTION(BlueprintImplementableEvent, Meta = (DisplayName = "On Death Montage Ended"))
 	void OnDeathMontageEnded();
 
 	static UAnimMontage* FindTagedMontage(TArray<FTagedAnimMontage>& Montages, FGameplayTagContainer MontageTags, UAnimMontage* DefaultMontage);
+
+	UFUNCTION(BlueprintGetter)
+	bool GetIsStunned();
+
+	UFUNCTION(BlueprintCallable)
+	void SetStunned(bool bStunned);
 
 protected:
 	UFUNCTION()
@@ -61,18 +66,18 @@ protected:
 	void ReceiveOnDied(UHealthComponent* InHealthComponent, FDamageInfo LastDamageInfo);
 
 	UFUNCTION(BlueprintImplementableEvent, Meta = (DisplayName = "On Stuned"))
-	void ReceiveOnStuned(bool bInStuned);
+	void ReceiveOnStunned(bool bInStunned);
 
 public:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	bool AttackEnabled = true;
+	UPROPERTY(BlueprintAssignable, Category = "Event Dispatched")
+	FStunnedSignature OnStunned;
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class UHealthComponent> HealthComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	TObjectPtr<class UFightComponent> FightComponent;
+	TObjectPtr<class UCombatComponent> CombatComponent;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animations)
 	UAnimMontage* DefaultDamageMontage;
@@ -86,6 +91,6 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Animations)
 	TArray<FTagedAnimMontage> OnDeathMontages;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-	bool bStuned = false;
+	UPROPERTY(VisibleAnywhere, BlueprintGetter = GetIsStunned)
+	bool bStunned = false;
 };
