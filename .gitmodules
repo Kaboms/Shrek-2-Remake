@@ -7,3 +7,6 @@
 [submodule "Plugins/CombatSystem"]
 	path = Plugins/CombatSystem
 	url = https://github.com/Kaboms/UE-CombatSystem.git
+[submodule "Plugins/InventorySystem"]
+	path = Plugins/InventorySystem
+	url = https://github.com/Kaboms/UE-Inventory-System.git
