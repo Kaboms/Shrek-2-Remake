@@ -60,7 +60,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Die(FDamageInfo LastDamageInfo);
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintPure)
 	bool IsAlive() { return Health > 0; }
 
 public:
