@@ -107,10 +107,13 @@ protected:
 	bool bCanDoubleJumpOnFalling;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement)
-	int MaxWalkSpeed = 600;
+	int32 MaxWalkSpeed = 600;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement)
-	int MaxWadeSpeed = 300;
+	int32 MaxWadeSpeed = 300;
+
+	UPROPERTY(BlueprintReadWrite)
+	bool bInAction = false;
 
 	/*
 	* Uses to stop jump ability after reach jump apex

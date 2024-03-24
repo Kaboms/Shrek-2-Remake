@@ -99,7 +99,7 @@ void APlayerCharacterBase::PostInitializeComponents()
 
 void APlayerCharacterBase::Attack()
 {
-	if (bStunned)
+	if (bStunned || bInAction)
 		return;
 
 	if (GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Walking
