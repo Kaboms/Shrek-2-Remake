@@ -1,4 +1,5 @@
-Remake of the culted Video Game - Shrek 2 on Unreal Engine 5.
+### Remake of the culted Video Game - Shrek 2 on Unreal Engine 5.
+![Preview](Docs/Assets/Preview.gif)
 
 The main goal is move the original game to Unreal Engine 5.
 
@@ -7,7 +8,7 @@ The main goal is move the original game to Unreal Engine 5.
 Textures upscaled with [Upscayl](https://www.upscayl.org).
 
 Used plugins:
-- [ClimbingSystem](https://github.com/Kaboms/UE-Climbing-System).
-- [CombatSystem](https://github.com/Kaboms/UE-CombatSystem).
-- [InventorySystem](https://github.com/Kaboms/UE-Inventory-System).
-- [GameInstanceServices](https://github.com/Kaboms/UE-ServicesSubsystem).
+- [ClimbingSystem](https://github.com/Kaboms/UE-Climbing-System)
+- [CombatSystem](https://github.com/Kaboms/UE-CombatSystem)
+- [InventorySystem](https://github.com/Kaboms/UE-Inventory-System)
+- [GameInstanceServices](https://github.com/Kaboms/UE-ServicesSubsystem)
