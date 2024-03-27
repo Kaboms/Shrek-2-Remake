@@ -58,7 +58,10 @@ public:
 	void AddHealth(float HealthToAdd);
 
 	UFUNCTION(BlueprintCallable)
-	void Die(FDamageInfo LastDamageInfo);
+	void HandleDeath(FDamageInfo LastDamageInfo);
+
+	UFUNCTION(BlueprintCallable)
+	void Die(FDamageInfo DeathDamageInfo);
 
 	UFUNCTION(BlueprintPure)
 	bool IsAlive() { return Health > 0; }

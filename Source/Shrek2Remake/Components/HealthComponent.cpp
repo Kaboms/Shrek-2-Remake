@@ -47,7 +47,7 @@ void UHealthComponent::ApplyDamage(FDamageInfo DamageInfo)
 
 		if (Health <= 0)
 		{
-			Die(DamageInfo);
+			HandleDeath(DamageInfo);
 		}
 	}
 }
@@ -60,8 +60,14 @@ void UHealthComponent::AddHealth(float HealthToAdd)
 	OnHealthChanged.Broadcast(this, Health);
 }
 
-void UHealthComponent::Die(FDamageInfo LastDamageInfo)
+void UHealthComponent::HandleDeath(FDamageInfo LastDamageInfo)
 {
 	OnDied.Broadcast(this, LastDamageInfo);
+}
+
+void UHealthComponent::Die(FDamageInfo LastDamageInfo)
+{
+	LastDamageInfo.Value = 999999;
+	ApplyDamage(LastDamageInfo);
 }
 
