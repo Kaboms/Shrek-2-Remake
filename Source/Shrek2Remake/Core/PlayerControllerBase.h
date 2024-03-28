@@ -17,6 +17,9 @@ class SHREK2REMAKE_API APlayerControllerBase : public APlayerController
 	GENERATED_BODY()
 
 public:
+	UFUNCTION(BlueprintPure, Meta = (DeterminesOutputType="PlayerControllerClass", WorldContext = "WorldContextObject"))
+	static APlayerControllerBase* GetPlayerControllerByClass(const UObject* WorldContextObject, TSubclassOf<APlayerControllerBase> PlayerControllerClass);
+
 	UFUNCTION(BlueprintGetter)
 	UInputConfig* GetInputConfig();
 

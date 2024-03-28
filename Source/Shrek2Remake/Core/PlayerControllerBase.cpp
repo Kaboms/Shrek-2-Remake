@@ -7,6 +7,12 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
+
+APlayerControllerBase* APlayerControllerBase::GetPlayerControllerByClass(const UObject* WorldContextObject, TSubclassOf<APlayerControllerBase> PlayerControllerClass)
+{
+	return Cast<APlayerControllerBase>(UGameplayStatics::GetPlayerController(WorldContextObject->GetWorld(), 0));
+}
 
 void APlayerControllerBase::SetupInputComponent()
 {
