@@ -140,6 +140,7 @@ void APlayerCharacterBase::Move(FVector ForwardDirection, FVector RightDirection
 		return;
 	}
 
+	// Disable movement on attack
 	if (!GetIsAttack())
 	{
 		// Add movement
