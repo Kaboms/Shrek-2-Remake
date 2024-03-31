@@ -18,7 +18,7 @@ class SHREK2REMAKE_API APlayerControllerBase : public APlayerController
 
 public:
 	UFUNCTION(BlueprintPure, Meta = (DeterminesOutputType="PlayerControllerClass", WorldContext = "WorldContextObject"))
-	static APlayerControllerBase* GetPlayerControllerByClass(const UObject* WorldContextObject, TSubclassOf<APlayerControllerBase> PlayerControllerClass);
+	static APlayerController* GetPlayerControllerByClass(const UObject* WorldContextObject, TSubclassOf<APlayerController> PlayerControllerClass);
 
 	UFUNCTION(BlueprintGetter)
 	UInputConfig* GetInputConfig();
@@ -28,7 +28,7 @@ protected:
 	void Look(const FInputActionValue& Value);
 
 	UFUNCTION(BlueprintImplementableEvent)
-	void ShowMainMenu(const FInputActionValue& Value);
+	void ShowPauseMenu(const FInputActionValue& Value);
 
 	virtual void SetupInputComponent() override;
 

@@ -9,9 +9,9 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 
-APlayerControllerBase* APlayerControllerBase::GetPlayerControllerByClass(const UObject* WorldContextObject, TSubclassOf<APlayerControllerBase> PlayerControllerClass)
+APlayerController* APlayerControllerBase::GetPlayerControllerByClass(const UObject* WorldContextObject, TSubclassOf<APlayerController> PlayerControllerClass)
 {
-	return Cast<APlayerControllerBase>(UGameplayStatics::GetPlayerController(WorldContextObject->GetWorld(), 0));
+	return (UGameplayStatics::GetPlayerController(WorldContextObject->GetWorld(), 0));
 }
 
 void APlayerControllerBase::SetupInputComponent()
@@ -31,7 +31,7 @@ void APlayerControllerBase::SetupInputComponent()
 		EnhancedInputComponent->BindAction(InputConfig->LookInputAction, ETriggerEvent::Triggered, this, &APlayerControllerBase::Look);
 
 		//Pause
-		EnhancedInputComponent->BindAction(InputConfig->PauseInputAction, ETriggerEvent::Started, this, &APlayerControllerBase::ShowMainMenu);
+		EnhancedInputComponent->BindAction(InputConfig->PauseInputAction, ETriggerEvent::Started, this, &APlayerControllerBase::ShowPauseMenu);
 	}
 }
 

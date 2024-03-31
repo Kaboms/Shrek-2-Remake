@@ -31,10 +31,6 @@
 		{
 			"Name": "CommonUI",
 			"Enabled": true
-		},
-		{
-			"Name": "GameInstanceServices",
-			"Enabled": true
 		}
 	]
 }
