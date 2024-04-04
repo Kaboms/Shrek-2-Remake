@@ -51,7 +51,7 @@ Game Features:
 
 - 🔄 UI. Most work done, but need polishing.
 
-- 🔄 Potions. System implemented. Bun now worked only one potion. In Progress
+- 🔄 Potions. System implemented. By now worked only one potion. In Progress
 
 - 🔄 Save/load system. Basic implementation. In progress.
 
