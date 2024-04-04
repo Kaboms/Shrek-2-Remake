@@ -13,5 +13,57 @@ Used plugins:
 - [InventorySystem](https://github.com/Kaboms/UE-Inventory-System)
 - [GameInstanceServices](https://github.com/Kaboms/UE-ServicesSubsystem)
 
-
+### Progress
 Follow and watch the progress in [Telegram](https://t.me/shrek_2_remake)
+
+Levels:
+
+✅ 1. Swamp. Level implemented. Polishing.
+
+🔄 2. Carriage Hijack. Level implemeted. In progress.
+
+❌ 3. The Hunt. TODO
+
+❌ 4. Fairy Grand Mother's Office (Puss in Boots). TODO
+
+❌ 5. Fairy Grand Mother's Office (Donkey). TODO
+
+❌ 6. Hamlet. TODO
+
+❌ 7. Prison (Donkey). TODO
+
+❌ 8. Prison (Puss in Boots). TODO
+
+❌ 9. Prison (Shrek). TODO
+
+❌ 10. Castle Siege. TODO
+
+❌ 11. Fairy Grand Mother Battle. TODO
+
+
+Game Features:
+
+- ✅ Platforming, climbing.
+
+- ✅ Combat system.
+
+- ✅ Shop.
+
+- 🔄 UI. Most work done, but need polishing.
+
+- 🔄 Potions. System implemented. Bun now worked only one potion. In Progress
+
+- 🔄 Save/load system. Basic implementation. In progress.
+
+- 🔄 Gamepad integration. Implemented for player controller, but need implementation for UI
+
+- ❌ Cutsenes.
+
+
+Player Characters:
+
+- ✅ Shrek. Implemented. Polishing.
+
+- ❌ Donkey. TODO
+
+- ❌ Puss in Boots. TODO
