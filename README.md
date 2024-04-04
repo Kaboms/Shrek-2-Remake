@@ -12,3 +12,6 @@ Used plugins:
 - [CombatSystem](https://github.com/Kaboms/UE-CombatSystem)
 - [InventorySystem](https://github.com/Kaboms/UE-Inventory-System)
 - [GameInstanceServices](https://github.com/Kaboms/UE-ServicesSubsystem)
+
+
+Follow and watch the progress in [Telegram](https://t.me/shrek_2_remake)
