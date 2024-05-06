@@ -10,3 +10,6 @@
 [submodule "Plugins/InventorySystem"]
 	path = Plugins/InventorySystem
 	url = https://github.com/Kaboms/UE-Inventory-System.git
+[submodule "Plugins/UIGoodies"]
+	path = Plugins/UIGoodies
+	url = https://github.com/Kaboms/UE-UI-Goodies

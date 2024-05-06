@@ -28,7 +28,16 @@ protected:
 	void Look(const FInputActionValue& Value);
 
 	UFUNCTION(BlueprintImplementableEvent)
-	void ShowPauseMenu(const FInputActionValue& Value);
+	void ShowPauseMenu();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void ShowPotionsMenu();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void HidePotionsMenu();
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void ThrowPotion();
 
 	virtual void SetupInputComponent() override;
 

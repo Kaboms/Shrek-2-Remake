@@ -31,4 +31,10 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<const UInputAction> PauseInputAction = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<const UInputAction> ShowRadialMenuInputAction = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	TObjectPtr<const UInputAction> ThrowPotionInputAction = nullptr;
 };

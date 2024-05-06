@@ -32,6 +32,11 @@ void APlayerControllerBase::SetupInputComponent()
 
 		//Pause
 		EnhancedInputComponent->BindAction(InputConfig->PauseInputAction, ETriggerEvent::Started, this, &APlayerControllerBase::ShowPauseMenu);
+
+		EnhancedInputComponent->BindAction(InputConfig->ShowRadialMenuInputAction, ETriggerEvent::Started, this, &APlayerControllerBase::ShowPotionsMenu);
+		EnhancedInputComponent->BindAction(InputConfig->ShowRadialMenuInputAction, ETriggerEvent::Completed, this, &APlayerControllerBase::HidePotionsMenu);
+
+		EnhancedInputComponent->BindAction(InputConfig->ThrowPotionInputAction, ETriggerEvent::Started, this, &APlayerControllerBase::ThrowPotion);
 	}
 }
 
