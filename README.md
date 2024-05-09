@@ -55,9 +55,9 @@ Game Features:
 
 - 🔄 Save/load system. Basic implementation. In progress.
 
-- 🔄 Gamepad integration. Implemented for player controller, but need implementation for UI
+- 🔄 Gamepad integration. UI and Player Controller integrated. Polishing
 
-- ❌ Cutsenes.
+- ❌ Cutscenes.
 
 
 Player Characters:
