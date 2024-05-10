@@ -54,6 +54,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void Attack();
 
+	UFUNCTION(BlueprintNativeEvent, meta = (DisplayName = "CanAttack"))
+	bool CanAttack() const;
+	virtual bool CanAttack_Implementation() const;
+
 	void OnMoveInput(const FInputActionValue& Value);
 
 	void Move(FVector ForwardDirection, FVector RightDirection, FVector2D MovementVector);

@@ -99,17 +99,17 @@ void APlayerCharacterBase::PostInitializeComponents()
 
 void APlayerCharacterBase::Attack()
 {
-	if (bStunned || bInAction)
+	if (!CanAttack())
 		return;
 
-	if (GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Walking
-		/*&& EWalkingSubMovementMode != EWalkingSubMovementMode::Wading original game has ability to attack in water, but this look weird*/)
-	{
-		if (!GetMovementComponent()->IsFalling())
-		{
-			ReceiveAttack();
-		}
-	}
+	ReceiveAttack();
+}
+
+bool APlayerCharacterBase::CanAttack_Implementation() const
+{
+	return !bStunned && !bInAction && GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Walking
+		&& !GetMovementComponent()->IsFalling();
+		/*&& EWalkingSubMovementMode != EWalkingSubMovementMode::Wading original game has ability to attack in water, but this look weird*/
 }
 
 void APlayerCharacterBase::OnMoveInput(const FInputActionValue& Value)

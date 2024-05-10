@@ -38,12 +38,15 @@ void UHealthComponent::SetMaxHealth(float NewMaxHealth, bool AbjustHealthToMax)
 
 void UHealthComponent::ApplyDamage(FDamageInfo DamageInfo)
 {
-	if (Health > 0)
+	if (Health > 0 && bCanBeDamaged)
 	{
-		Health -= DamageInfo.Value;
+		if (!bImmortal)
+		{
+			Health -= DamageInfo.Value;
+			OnHealthChanged.Broadcast(this, Health);
+		}
 
 		OnDamaged.Broadcast(this, DamageInfo);
-		OnHealthChanged.Broadcast(this, Health);
 
 		if (Health <= 0)
 		{

@@ -67,6 +67,13 @@ public:
 	bool IsAlive() { return Health > 0; }
 
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bCanBeDamaged = true;
+
+	// If true damage will not apply.
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bImmortal = false;
+
 	UPROPERTY(BlueprintAssignable, Category = "Event Dispatcher")
 	FDiedSignature OnDied;
 

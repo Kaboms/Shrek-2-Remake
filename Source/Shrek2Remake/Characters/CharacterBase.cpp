@@ -158,7 +158,10 @@ void ACharacterBase::OnDied(UHealthComponent* InHealthComponent, FDamageInfo Las
 		AnimInstance->Montage_Play(MontageToPlay);
 	}
 
-	CombatComponent->bEnabled = false;
+	if (IsValid(CombatComponent))
+	{
+		CombatComponent->bEnabled = false;
+	}
 
 	SetStunned(true);
 
