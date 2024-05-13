@@ -10,9 +10,9 @@ Textures upscaled with [Upscayl](https://www.upscayl.org).
 Used plugins:
 - [ClimbingSystem](https://github.com/Kaboms/UE-Climbing-System)
 - [CombatSystem](https://github.com/Kaboms/UE-CombatSystem)
-- [InventorySystem](https://github.com/Kaboms/UE-Inventory-System)
+- [InventorySystem](https://github.com/Kaboms/UE-Inventory-System) (For potion shop and potion equipment)
 - [GameInstanceServices](https://github.com/Kaboms/UE-ServicesSubsystem)
-
+- [UI-Goodies](https://github.com/Kaboms/UE-UI-Goodies) (Radial Menu)
 ### Progress
 Follow and watch the progress in [Telegram](https://t.me/shrek_2_remake)
 
