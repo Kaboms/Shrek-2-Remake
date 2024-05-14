@@ -49,7 +49,7 @@ void APlayerCharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
 
-	if (PlayerController->PlayerCameraManager)
+	if (IsValid(PlayerController) && PlayerController->PlayerCameraManager)
 	{
 		// Limit camera rotation
 		PlayerController->PlayerCameraManager->ViewPitchMin = -80;
