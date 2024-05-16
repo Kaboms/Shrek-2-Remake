@@ -132,17 +132,24 @@ void ACharacterBase::OnDamageReceived(UHealthComponent* InHealthComponent, FDama
 
 		UAnimMontage* MontageToPlay = FindTagedMontage(OnDamageMontages, DamageInfo.DamageIdentifier, DefaultDamageMontage);
 
-		FOnMontageEnded OnMontageEndedDelegate;
-		OnMontageEndedDelegate.BindLambda([this](UAnimMontage* AnimMontage, bool bInterrupted)
-			{
-				if (HealthComponent->IsAlive())
-					SetStunned(false);
-			});
-
-		if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
+		if (MontageToPlay)
 		{
-			AnimInstance->Montage_Play(MontageToPlay);
-			AnimInstance->Montage_SetEndDelegate(OnMontageEndedDelegate, MontageToPlay);
+			FOnMontageEnded OnMontageEndedDelegate;
+			OnMontageEndedDelegate.BindLambda([this](UAnimMontage* AnimMontage, bool bInterrupted)
+				{
+					if (HealthComponent->IsAlive())
+						SetStunned(false);
+				});
+
+			if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
+			{
+				AnimInstance->Montage_Play(MontageToPlay);
+				AnimInstance->Montage_SetEndDelegate(OnMontageEndedDelegate, MontageToPlay);
+			}
+		}
+		else
+		{
+			SetStunned(false);
 		}
 	}
 
