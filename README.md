@@ -1,47 +1,55 @@
-### Remake of the culted Video Game - Shrek 2 on Unreal Engine 5.
-![Preview](Docs/Assets/Preview.gif)
+<h1 align="center">Remake of the culted Video Game - Shrek 2 on Unreal Engine 5</h1>
+<div align="center" >
+  
+<img src="Docs/Assets/Preview.gif">
 
 The main goal is move the original game to Unreal Engine 5.
+
+:star: See more in [![Follow and watch the progress in Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=flat-squeare&logo=telegram&logoColor=white)](https://t.me/shrek_2_remake) :star:
+
+</div>
+
+<h2>Overview</h2>
 
 3D models and Textures exported from original game using [UEViewer](https://github.com/gildor2/UEViewer).
 
 Textures upscaled with [Upscayl](https://www.upscayl.org).
 
-Used plugins:
+<h2>Used plugins</h2>
+
 - [ClimbingSystem](https://github.com/Kaboms/UE-Climbing-System)
 - [CombatSystem](https://github.com/Kaboms/UE-CombatSystem)
 - [InventorySystem](https://github.com/Kaboms/UE-Inventory-System) (For potion shop and potion equipment)
 - [GameInstanceServices](https://github.com/Kaboms/UE-ServicesSubsystem)
 - [UI-Goodies](https://github.com/Kaboms/UE-UI-Goodies) (Radial Menu)
-### Progress
-Follow and watch the progress in [Telegram](https://t.me/shrek_2_remake)
 
-Levels:
+<h1>Progress</h2>
 
-✅ 1. Swamp. Level implemented. Polishing.
+<h2>Levels</h2>
 
-🔄 2. Carriage Hijack. Level implemeted. In progress.
+- ✅ 1. Swamp. Level implemented. Polishing.
 
-❌ 3. The Hunt. TODO
+- 🔄 2. Carriage Hijack. Level implemeted. In progress.
 
-❌ 4. Fairy Grand Mother's Office (Puss in Boots). TODO
+- ❌ 3. The Hunt. TODO
 
-❌ 5. Fairy Grand Mother's Office (Donkey). TODO
+- ❌ 4. Fairy Grand Mother's Office (Puss in Boots). TODO
 
-❌ 6. Hamlet. TODO
+- ❌ 5. Fairy Grand Mother's Office (Donkey). TODO
 
-❌ 7. Prison (Donkey). TODO
+- ❌ 6. Hamlet. TODO
 
-❌ 8. Prison (Puss in Boots). TODO
+- ❌ 7. Prison (Donkey). TODO
 
-❌ 9. Prison (Shrek). TODO
+- ❌ 8. Prison (Puss in Boots). TODO
 
-❌ 10. Castle Siege. TODO
+- ❌ 9. Prison (Shrek). TODO
 
-❌ 11. Fairy Grand Mother Battle. TODO
+- ❌ 10. Castle Siege. TODO
 
+- ❌ 11. Fairy Grand Mother Battle. TODO
 
-Game Features:
+<h2>Game Features</h2>
 
 - ✅ Platforming, climbing.
 
@@ -59,11 +67,10 @@ Game Features:
 
 - ❌ Cutscenes.
 
-
-Player Characters:
+<h2>Player Characters</h2>
 
 - ✅ Shrek. Implemented. Polishing.
 
-- ❌ Donkey. TODO
+- 🔄 Donkey. In progress
 
 - ❌ Puss in Boots. TODO
