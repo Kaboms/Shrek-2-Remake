@@ -5,7 +5,7 @@
 
 The main goal is move the original game to Unreal Engine 5.
 
-:star: See more in [![Follow and watch the progress in Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=flat-squeare&logo=telegram&logoColor=white)](https://t.me/shrek_2_remake) :star:
+:star: See more in [![Follow and watch the progress in Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=flat-squeare&logo=telegram&logoColor=white)](https://t.me/shrek_2_remake) or [![X](https://img.shields.io/twitter/follow/CyberAmphibian)](https://x.com/CyberAmphibian):star:
 
 </div>
 
