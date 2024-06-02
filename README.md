@@ -33,9 +33,9 @@ Textures upscaled with [Upscayl](https://www.upscayl.org).
 
 - ✅ 1. Swamp. Level implemented. Polishing.
 
-- 🔄 2. Carriage Hijack. Level implemeted. In progress.
+- ✅ 2. Carriage Hijack. Level implemeted. Polishing
 
-- ❌ 3. The Hunt. TODO
+- 🔄 3. The Hunt. In Progress.
 
 - ❌ 4. Fairy Grand Mother's Office (Puss in Boots). TODO
 
