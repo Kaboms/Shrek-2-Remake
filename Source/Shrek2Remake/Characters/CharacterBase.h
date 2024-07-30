@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Components/HealthComponent.h"
+#include "GameplayTagAssetInterface.h"
 
 #include "Core/TagedAnimMontage.h"
 
@@ -15,7 +16,7 @@ class UFightComponent;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FStunnedSignature, bool, IsStunned);
 
 UCLASS()
-class SHREK2REMAKE_API ACharacterBase : public ACharacter
+class SHREK2REMAKE_API ACharacterBase : public ACharacter, public IGameplayTagAssetInterface
 {
 	GENERATED_BODY()
 
@@ -72,6 +73,10 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Event Dispatched")
 	FStunnedSignature OnStunned;
 
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FGameplayTagContainer CharacterTags;
+
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<class UHealthComponent> HealthComponent;
@@ -93,4 +98,7 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintGetter = GetIsStunned)
 	bool bStunned = false;
+
+	// Inherited via IGameplayTagAssetInterface
+	void GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const override;
 };

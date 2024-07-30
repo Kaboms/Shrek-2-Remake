@@ -20,6 +20,9 @@ void FGameplayTagsNative::AddAllTags(UGameplayTagsManager& Manager)
 {
 	AddTag(Damage_Direction_Back, "Damage.Direction.Back", "Damage was received at back");
 	AddTag(Damage_Direction_Front, "Damage.Direction.Front", "Damage was received at front");
+
+	AddTag(Character_Player, "Character.Player", "");
+	AddTag(Character_Enemy, "Character.Enemy", "");
 }
 
 void FGameplayTagsNative::AddTag(FGameplayTag& OutTag, const ANSICHAR* TagName, const ANSICHAR* TagComment)

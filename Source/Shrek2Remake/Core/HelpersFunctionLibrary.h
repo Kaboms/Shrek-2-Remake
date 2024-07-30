@@ -15,6 +15,10 @@ class SHREK2REMAKE_API UHelpersFunctionLibrary : public UBlueprintFunctionLibrar
 	GENERATED_BODY()
 
 public:
+
 	UFUNCTION(BlueprintPure)
 	static bool IsWithEditor();
+
+	UFUNCTION(BlueprintPure)
+	static bool DoesTargetMeetTagRequirements(const FGameplayTagRequirements& SourceTagReqs, const FGameplayTagContainer& TargetTags);
 };

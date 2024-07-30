@@ -174,3 +174,8 @@ void ACharacterBase::OnDied(UHealthComponent* InHealthComponent, FDamageInfo Las
 
 	ReceiveOnDied(InHealthComponent, LastDamageInfo);
 }
+
+void ACharacterBase::GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const
+{
+	TagContainer = CharacterTags;
+}

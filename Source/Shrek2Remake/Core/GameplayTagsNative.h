@@ -23,6 +23,9 @@ public:
 	FGameplayTag Damage_Direction_Back;
 	FGameplayTag Damage_Direction_Front;
 
+	FGameplayTag Character_Player;
+	FGameplayTag Character_Enemy;
+
 private:
 	static FGameplayTagsNative GameplayTags;
 };
