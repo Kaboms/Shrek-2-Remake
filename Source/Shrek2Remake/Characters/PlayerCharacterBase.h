@@ -10,13 +10,6 @@
 #include "Input/InputConfig.h"
 #include "PlayerCharacterBase.generated.h"
 
-UENUM(BlueprintType)
-enum class EWalkingSubMovementMode : uint8
-{
-	None,
-	Wading
-};
-
 class AWeapon;
 
 UCLASS()
@@ -40,10 +33,7 @@ public:
 
 	virtual void NotifyJumpApex() override;
 
-	virtual void OnMovementModeChanged(EMovementMode PrevMovementMode, uint8 PreviousCustomMode = 0) override;
-
-	UFUNCTION(BlueprintCallable)
-	void UpdateMovementMode();
+	virtual void UpdateMovementMode() override;
 
 	UFUNCTION(BlueprintCallable)
 	void RotateYawTo(FVector Point);
@@ -92,9 +82,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	class UClimbingComponent* ClimbingComponent;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Movement)
-	EWalkingSubMovementMode WalkingSubMovementMode;
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement)
 	float FallingCurrentRollSpeed;
 
@@ -109,12 +96,6 @@ protected:
 	// Can character make jump when falling. When false we cannot make jump after reached jump apex or on falling
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement)
 	bool bCanDoubleJumpOnFalling;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement)
-	int32 MaxWalkSpeed = 600;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement)
-	int32 MaxWadeSpeed = 300;
 
 	UPROPERTY(BlueprintReadWrite)
 	bool bInAction = false;

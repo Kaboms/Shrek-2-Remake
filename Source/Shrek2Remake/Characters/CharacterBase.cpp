@@ -4,6 +4,7 @@
 #include "Characters/CharacterBase.h"
 #include "CombatComponent.h"
 #include "Core/GameplayTagsNative.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 #include "Kismet/KismetMathLibrary.h"
 
@@ -83,6 +84,8 @@ void ACharacterBase::OnMovementModeChanged(EMovementMode PrevMovementMode, uint8
 	{
 		CombatComponent->InterruptAttack();
 	}
+
+	UpdateMovementMode();
 }
 
 bool ACharacterBase::GetIsStunned()
@@ -97,6 +100,21 @@ void ACharacterBase::SetStunned(bool bInStunned)
 	ReceiveOnStunned(bStunned);
 
 	OnStunned.Broadcast(bStunned);
+}
+
+void ACharacterBase::UpdateMovementMode()
+{
+	if (GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Walking)
+	{
+		if (WalkingSubMovementMode == EWalkingSubMovementMode::Wading)
+		{
+			GetCharacterMovement()->MaxWalkSpeed = MaxWadeSpeed;
+		}
+		else
+		{
+			GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
+		}
+	}
 }
 
 void ACharacterBase::OnPlayMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)

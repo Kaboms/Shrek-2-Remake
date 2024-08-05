@@ -227,28 +227,11 @@ void APlayerCharacterBase::NotifyJumpApex()
 	bJumpApexReached = true;
 }
 
-void APlayerCharacterBase::OnMovementModeChanged(EMovementMode PrevMovementMode, uint8 PreviousCustomMode)
-{
-	Super::OnMovementModeChanged(PrevMovementMode, PreviousCustomMode);
-
-	UpdateMovementMode();
-}
-
 void APlayerCharacterBase::UpdateMovementMode()
 {
 	ResetFallingRoll();
 
-	if (GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Walking)
-	{
-		if (WalkingSubMovementMode == EWalkingSubMovementMode::Wading)
-		{
-			GetCharacterMovement()->MaxWalkSpeed = MaxWadeSpeed;
-		}
-		else
-		{
-			GetCharacterMovement()->MaxWalkSpeed = MaxWalkSpeed;
-		}
-	}
+	Super::UpdateMovementMode();
 }
 
 void APlayerCharacterBase::RotateYawTo(FVector Point)

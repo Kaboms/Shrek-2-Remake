@@ -11,6 +11,13 @@
 
 #include "CharacterBase.generated.h"
 
+UENUM(BlueprintType)
+enum class EWalkingSubMovementMode : uint8
+{
+	None,
+	Wading
+};
+
 class UFightComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FStunnedSignature, bool, IsStunned);
@@ -37,7 +44,7 @@ public:
 	UFUNCTION(BlueprintPure)
 	bool GetIsAttack() const;
 
-	virtual void OnMovementModeChanged(EMovementMode PrevMovementMode, uint8 PreviousCustomMode = 0);
+	virtual void OnMovementModeChanged(EMovementMode PrevMovementMode, uint8 PreviousCustomMode = 0) override;
 
 	UFUNCTION(BlueprintImplementableEvent, Meta = (DisplayName = "On Death Montage Ended"))
 	void OnDeathMontageEnded();
@@ -49,6 +56,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void SetStunned(bool bStunned);
+
+	UFUNCTION(BlueprintCallable)
+	virtual void UpdateMovementMode();
 
 protected:
 	UFUNCTION()
@@ -73,9 +83,17 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Event Dispatched")
 	FStunnedSignature OnStunned;
 
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FGameplayTagContainer CharacterTags;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Pickup)
+	bool bHasPickupItem = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement)
+	int32 MaxWalkSpeed = 600;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement)
+	int32 MaxWadeSpeed = 300;
 
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
@@ -101,4 +119,10 @@ protected:
 
 	// Inherited via IGameplayTagAssetInterface
 	void GetOwnedGameplayTags(FGameplayTagContainer& TagContainer) const override;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Pickup)
+	AActor* PickupedItem;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Movement)
+	EWalkingSubMovementMode WalkingSubMovementMode;
 };
