@@ -185,7 +185,7 @@ void ACharacterBase::OnDied(UHealthComponent* InHealthComponent, FDamageInfo Las
 
 	if (IsValid(CombatComponent))
 	{
-		CombatComponent->bEnabled = false;
+		CombatComponent->Deactivate();
 	}
 
 	SetStunned(true);
