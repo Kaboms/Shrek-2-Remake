@@ -36,7 +36,7 @@ void APlayerControllerBase::SetupInputComponent()
 		EnhancedInputComponent->BindAction(InputConfig->ShowRadialMenuInputAction, ETriggerEvent::Started, this, &APlayerControllerBase::ShowPotionsMenu);
 		EnhancedInputComponent->BindAction(InputConfig->ShowRadialMenuInputAction, ETriggerEvent::Completed, this, &APlayerControllerBase::HidePotionsMenu);
 
-		EnhancedInputComponent->BindAction(InputConfig->ThrowPotionInputAction, ETriggerEvent::Started, this, &APlayerControllerBase::ThrowPotion);
+		EnhancedInputComponent->BindAction(InputConfig->UsePotionInputAction, ETriggerEvent::Started, this, &APlayerControllerBase::OnUsePotionInput);
 	}
 }
 

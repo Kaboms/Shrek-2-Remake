@@ -36,5 +36,5 @@ public:
 	TObjectPtr<const UInputAction> ShowRadialMenuInputAction = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TObjectPtr<const UInputAction> ThrowPotionInputAction = nullptr;
+	TObjectPtr<const UInputAction> UsePotionInputAction = nullptr;
 };

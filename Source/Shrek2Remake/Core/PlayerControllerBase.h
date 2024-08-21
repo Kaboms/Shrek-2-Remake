@@ -37,7 +37,7 @@ protected:
 	void HidePotionsMenu();
 
 	UFUNCTION(BlueprintImplementableEvent)
-	void ThrowPotion();
+	void OnUsePotionInput();
 
 	virtual void SetupInputComponent() override;
 
