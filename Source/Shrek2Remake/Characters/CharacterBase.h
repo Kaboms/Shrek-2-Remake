@@ -83,7 +83,7 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "Event Dispatched")
 	FStunnedSignature OnStunned;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FGameplayTagContainer CharacterTags;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = Pickup)
