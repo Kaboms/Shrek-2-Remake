@@ -36,5 +36,5 @@ protected:
 	float DialogueSoundVolume = 1;
 
 	UPROPERTY(config, BlueprintReadWrite)
-	int AutoQuality = 5;
+	int32 AutoQuality = 5;
 };
