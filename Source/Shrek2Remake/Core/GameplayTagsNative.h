@@ -1,31 +1,13 @@
-// (c) 2021 Sonic Terror
-
 #pragma once
 
-#include "GameplayTagContainer.h"
+#include "NativeGameplayTags.h"
 
-/**
- * Inspired by FLyraGameplayTags
- */
-struct FGameplayTagsNative
+namespace GameplayTagsNative
 {
+    // Abilities
+    UE_DECLARE_GAMEPLAY_TAG_EXTERN(Damage_Direction_Back);
+    UE_DECLARE_GAMEPLAY_TAG_EXTERN(Damage_Direction_Front);
 
-public:
-	static const FGameplayTagsNative& Get() { return GameplayTags; }
-
-	static void InitializeNativeTags();
-
-protected:
-	void AddAllTags(UGameplayTagsManager& Manager);
-	void AddTag(FGameplayTag& OutTag, const ANSICHAR* TagName, const ANSICHAR* TagComment);
-
-public:
-	FGameplayTag Damage_Direction_Back;
-	FGameplayTag Damage_Direction_Front;
-
-	FGameplayTag Character_Player;
-	FGameplayTag Character_Enemy;
-
-private:
-	static FGameplayTagsNative GameplayTags;
+    UE_DECLARE_GAMEPLAY_TAG_EXTERN(Character_Player);
+    UE_DECLARE_GAMEPLAY_TAG_EXTERN(Character_Enemy);
 };

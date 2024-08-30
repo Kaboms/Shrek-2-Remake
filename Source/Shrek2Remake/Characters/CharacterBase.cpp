@@ -140,11 +140,11 @@ void ACharacterBase::OnDamageReceived(UHealthComponent* InHealthComponent, FDama
 		{
 			if (FVector::DotProduct(GetActorForwardVector(), UKismetMathLibrary::Normal(DamageInfo.ImpactPoint - GetActorLocation())) >= 0)
 			{
-				DamageInfo.DamageIdentifier.AddTag(FGameplayTagsNative::Get().Damage_Direction_Front);
+				DamageInfo.DamageIdentifier.AddTag(GameplayTagsNative::Damage_Direction_Front);
 			}
 			else
 			{
-				DamageInfo.DamageIdentifier.AddTag(FGameplayTagsNative::Get().Damage_Direction_Back);
+				DamageInfo.DamageIdentifier.AddTag(GameplayTagsNative::Damage_Direction_Back);
 			}
 		}
 

@@ -7,11 +7,4 @@
 void UExtendedAssetManager::StartInitialLoading()
 {
     Super::StartInitialLoading();
-
-    InitializeNativeTags();
-}
-
-void UExtendedAssetManager::InitializeNativeTags()
-{
-    FGameplayTagsNative::InitializeNativeTags();
 }

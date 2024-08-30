@@ -16,7 +16,4 @@ class SHREK2REMAKE_API UExtendedAssetManager : public UAssetManager
 
 protected:
 	virtual void StartInitialLoading() override;
-
-private:
-	void InitializeNativeTags();
 };

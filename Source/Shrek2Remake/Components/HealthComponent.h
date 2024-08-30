@@ -15,10 +15,10 @@ struct FDamageInfo
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float Value;
+	float Value = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector ImpactPoint;
+	FVector ImpactPoint = FVector::ZeroVector;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FGameplayTagContainer DamageIdentifier;

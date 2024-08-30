@@ -1,31 +1,11 @@
-// (c) 2021 Sonic Terror
-
-
 #include "Core/GameplayTagsNative.h"
-#include "GameplayTagsManager.h"
 
-FGameplayTagsNative FGameplayTagsNative::GameplayTags;
-
-void FGameplayTagsNative::InitializeNativeTags()
+namespace GameplayTagsNative
 {
-	UGameplayTagsManager& Manager = UGameplayTagsManager::Get();
+    // Abilities
+    UE_DEFINE_GAMEPLAY_TAG(Damage_Direction_Back, "Damage.Direction.Back");
+    UE_DEFINE_GAMEPLAY_TAG(Damage_Direction_Front, "Damage.Direction.Front");
 
-	GameplayTags.AddAllTags(Manager);
-
-	// Notify manager that we are done adding native tags.
-	Manager.DoneAddingNativeTags();
-}
-
-void FGameplayTagsNative::AddAllTags(UGameplayTagsManager& Manager)
-{
-	AddTag(Damage_Direction_Back, "Damage.Direction.Back", "Damage was received at back");
-	AddTag(Damage_Direction_Front, "Damage.Direction.Front", "Damage was received at front");
-
-	AddTag(Character_Player, "Character.Player", "");
-	AddTag(Character_Enemy, "Character.Enemy", "");
-}
-
-void FGameplayTagsNative::AddTag(FGameplayTag& OutTag, const ANSICHAR* TagName, const ANSICHAR* TagComment)
-{
-	OutTag = UGameplayTagsManager::Get().AddNativeGameplayTag(FName(TagName), FString(TEXT("(Native) ")) + FString(TagComment));
+    UE_DEFINE_GAMEPLAY_TAG(Character_Player, "Character.Player");
+    UE_DEFINE_GAMEPLAY_TAG(Character_Enemy, "Character.Enemy");
 }
