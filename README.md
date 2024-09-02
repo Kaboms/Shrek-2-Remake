@@ -64,7 +64,7 @@ Textures upscaled with [Upscayl](https://www.upscayl.org).
 
 - 🔄 UI. Most work done, but need polishing.
 
-- 🔄 Potions. System implemented. By now worked only one potion. In Progress
+- ✅ Potions.
 
 - 🔄 Save/load system. Basic implementation. In progress.
 
@@ -76,6 +76,6 @@ Textures upscaled with [Upscayl](https://www.upscayl.org).
 
 - ✅ Shrek. Implemented. Polishing.
 
-- 🔄 Donkey. In progress
+- ✅ Donkey. Implemented. Polishing.
 
 - ❌ Puss in Boots. TODO
