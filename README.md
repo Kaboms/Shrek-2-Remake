@@ -27,6 +27,7 @@ Textures upscaled with [Upscayl](https://www.upscayl.org).
 - [InventorySystem](https://github.com/Kaboms/UE-Inventory-System) (For potion shop and potion equipment)
 - [GameInstanceServices](https://github.com/Kaboms/UE-ServicesSubsystem)
 - [UI-Goodies](https://github.com/Kaboms/UE-UI-Goodies) (Radial Menu)
+- [AsyncLoadingScreen](https://github.com/truong-bui/AsyncLoadingScreen)
 
 <h1>Progress</h2>
 
