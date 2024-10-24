@@ -6,6 +6,7 @@
 // Sets default values for this component's properties
 UHealthComponent::UHealthComponent()
 {
+	bAutoActivate = true;
 	PrimaryComponentTick.bCanEverTick = false;
 
 	Health = MaxHealth;
@@ -38,6 +39,9 @@ void UHealthComponent::SetMaxHealth(float NewMaxHealth, bool AbjustHealthToMax)
 
 void UHealthComponent::ApplyDamage(FDamageInfo DamageInfo)
 {
+	if (!IsActive())
+		return;
+
 	if (Health > 0 && bCanBeDamaged)
 	{
 		if (!bImmortal)
