@@ -117,6 +117,18 @@ void ACharacterBase::UpdateMovementMode()
 	}
 }
 
+void ACharacterBase::Landed(const FHitResult& Hit)
+{
+	Super::Landed(Hit);
+}
+
+void ACharacterBase::FellOutOfWorld(const UDamageType& dmgType)
+{
+	FDamageInfo DamageInfo;
+	DamageInfo.DamageIdentifier.AddTag(GameplayTagsNative::Damage_Type_Fall);
+	HealthComponent->Die(DamageInfo);
+}
+
 void ACharacterBase::OnPlayMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
 {
 	if (NotifyName == FName(TEXT("DeathEnded")))
@@ -136,9 +148,11 @@ void ACharacterBase::OnDamageReceived(UHealthComponent* InHealthComponent, FDama
 	{
 		SetStunned(true);
 
-		if (!DamageInfo.ImpactPoint.IsZero())
+		FVector ImpactPoint = DamageInfo.DamageHit.Location;
+
+		if (!ImpactPoint.IsZero())
 		{
-			if (FVector::DotProduct(GetActorForwardVector(), UKismetMathLibrary::Normal(DamageInfo.ImpactPoint - GetActorLocation())) >= 0)
+			if (FVector::DotProduct(GetActorForwardVector(), UKismetMathLibrary::Normal(ImpactPoint - GetActorLocation())) >= 0)
 			{
 				DamageInfo.DamageIdentifier.AddTag(GameplayTagsNative::Damage_Direction_Front);
 			}

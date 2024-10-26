@@ -18,10 +18,10 @@ public:
 	float Value = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector ImpactPoint = FVector::ZeroVector;
+	FGameplayTagContainer DamageIdentifier;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FGameplayTagContainer DamageIdentifier;
+	FHitResult DamageHit;
 
 };
 
@@ -66,13 +66,33 @@ public:
 	UFUNCTION(BlueprintPure)
 	bool IsAlive() { return Health > 0; }
 
+	UFUNCTION(BlueprintCallable, Category = "Fall Damage")
+	void TryApplyFallDamage(const FHitResult& LandedHitResult);
+
+	UFUNCTION(BlueprintCallable, Category = "Fall Damage")
+	void GrantNoFallDamage();
+
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float MaxHealth = 100;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bCanBeDamaged = true;
 
 	// If true damage will not apply.
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bImmortal = false;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fall Damage")
+	float FallDamage = 0;
+
+	// Min velocity required for fall damage. Set zero to not fall damage
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fall Damage")
+	float FallDamageMinVelocity = 0;
+
+	// If character landed to this materials they does not take fall damage
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Fall Damage")
+	TSet<TEnumAsByte<EPhysicalSurface>> NoFallDamageSurfaces;
 
 	UPROPERTY(BlueprintAssignable, Category = "Event Dispatcher")
 	FDiedSignature OnDied;
@@ -91,8 +111,9 @@ public:
 
 protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
-	float MaxHealth = 100;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float Health;
+
+	// If true next landing will be without fall damage
+	UPROPERTY(BlueprintReadWrite)
+	bool bNoFallDamageGranted = false;
 };

@@ -60,6 +60,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	virtual void UpdateMovementMode();
 
+	virtual void Landed(const FHitResult& Hit) override;
+
+	virtual void FellOutOfWorld(const class UDamageType& dmgType);
+
 protected:
 	UFUNCTION()
 	void OnPlayMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload);

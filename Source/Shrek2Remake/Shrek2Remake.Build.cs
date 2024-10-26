@@ -30,6 +30,7 @@ public class Shrek2Remake : ModuleRules
             "CoreUObject",
             "Engine",
             "InputCore",
+            "PhysicsCore"
         });
 
         PublicIncludePaths.Add("Shrek2Remake");

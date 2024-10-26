@@ -2,6 +2,8 @@
 
 
 #include "Components/HealthComponent.h"
+#include "GameFramework/Character.h"
+#include "PhysicalMaterials/PhysicalMaterial.h"
 
 // Sets default values for this component's properties
 UHealthComponent::UHealthComponent()
@@ -16,6 +18,11 @@ UHealthComponent::UHealthComponent()
 void UHealthComponent::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (ACharacter* OwnerCharacter = Cast<ACharacter>(GetOwner()))
+	{
+		OwnerCharacter->LandedDelegate.AddDynamic(this, &UHealthComponent::TryApplyFallDamage);
+	}
 }
 
 // Called every frame
@@ -76,5 +83,42 @@ void UHealthComponent::Die(FDamageInfo LastDamageInfo)
 {
 	LastDamageInfo.Value = 999999;
 	ApplyDamage(LastDamageInfo);
+}
+
+void UHealthComponent::TryApplyFallDamage(const FHitResult& LandedHitResult)
+{
+	if (bNoFallDamageGranted)
+	{
+		bNoFallDamageGranted = false;
+		return;
+	}
+
+	if (!bCanBeDamaged || bImmortal || FallDamage <= 0 || FallDamageMinVelocity <= 0)
+		return;
+
+	if (LandedHitResult.PhysMaterial.IsValid())
+	{
+		EPhysicalSurface Surface = UPhysicalMaterial::DetermineSurfaceType(LandedHitResult.PhysMaterial.Get());
+
+		if (NoFallDamageSurfaces.Contains(Surface))
+			return;
+	}
+
+	if (ACharacter* OwnerCharacter = Cast<ACharacter>(GetOwner()))
+	{
+		if (-OwnerCharacter->GetVelocity().Z > FallDamageMinVelocity)
+		{
+			FDamageInfo DamageInfo;
+			DamageInfo.DamageHit = LandedHitResult;
+			DamageInfo.Value = FallDamage;
+
+			ApplyDamage(DamageInfo);
+		}
+	}
+}
+
+void UHealthComponent::GrantNoFallDamage()
+{
+	bNoFallDamageGranted = true;
 }
 
