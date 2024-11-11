@@ -13,3 +13,6 @@
 [submodule "Plugins/UIGoodies"]
 	path = Plugins/UIGoodies
 	url = https://github.com/Kaboms/UE-UI-Goodies
+[submodule "Plugins/ShrekLevels"]
+	path = Plugins/ShrekLevels
+	url = https://github.com/Kaboms/Shrek-2-Remake-Levels.git
