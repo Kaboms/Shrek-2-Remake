@@ -33,25 +33,24 @@ Textures upscaled with [Upscayl](https://www.upscayl.org).
 <h2>Levels</h2>
 
 - ✅ 1. Swamp. Level implemented. Polishing.
-
 - ✅ 2. Carriage Hijack. Level implemeted. Polishing
 
-- 🔄 3. The Hunt. In Progress.
+- ✅ 3.1 The Hunt. Part 01. Polishing
+- ✅ 3.2 The Hunt. Part 02. Polishing
+- ✅ 3.3 The Hunt. Part 03. Polishing
+- 🔄 3.4 The Hunt. Part 04. In progress
 
 - ❌ 4. Fairy Grand Mother's Office (Puss in Boots). TODO
-
 - ❌ 5. Fairy Grand Mother's Office (Donkey). TODO
 
-- ❌ 6. Hamlet. TODO
+- ❌ 6.1 Hamlet. Part 01 TODO
+- ❌ 6.2 Hamlet. Part 02 (mines) TODO
+- ❌ 6.3 Hamlet. Part 03 TODO
 
 - ❌ 7. Prison (Donkey). TODO
-
 - ❌ 8. Prison (Puss in Boots). TODO
-
 - ❌ 9. Prison (Shrek). TODO
-
 - ❌ 10. Castle Siege. TODO
-
 - ❌ 11. Fairy Grand Mother Battle. TODO
 
 <h2>Game Features</h2>
