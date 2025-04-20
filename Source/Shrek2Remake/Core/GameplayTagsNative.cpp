@@ -8,5 +8,8 @@ namespace GameplayTagsNative
     UE_DEFINE_GAMEPLAY_TAG(Damage_Type_Fall, "Damage.Type.Fall");
 
     UE_DEFINE_GAMEPLAY_TAG(Character_Player, "Character.Player");
+    UE_DEFINE_GAMEPLAY_TAG(Character_Shrek, "Character.Shrek");
+    UE_DEFINE_GAMEPLAY_TAG(Character_Donkey, "Character.Donkey");
+
     UE_DEFINE_GAMEPLAY_TAG(Character_Enemy, "Character.Enemy");
 }
