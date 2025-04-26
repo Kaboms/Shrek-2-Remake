@@ -14,4 +14,7 @@ namespace GameplayTagsNative
     UE_DECLARE_GAMEPLAY_TAG_EXTERN(Character_Donkey);
 
     UE_DECLARE_GAMEPLAY_TAG_EXTERN(Character_Enemy);
+
+    UE_DECLARE_GAMEPLAY_TAG_EXTERN(Character_State_Carry);
+
 };

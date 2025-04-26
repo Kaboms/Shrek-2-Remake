@@ -12,4 +12,6 @@ namespace GameplayTagsNative
     UE_DEFINE_GAMEPLAY_TAG(Character_Donkey, "Character.Donkey");
 
     UE_DEFINE_GAMEPLAY_TAG(Character_Enemy, "Character.Enemy");
+
+    UE_DEFINE_GAMEPLAY_TAG(Character_State_Carry, "Character.State.Carry");
 }

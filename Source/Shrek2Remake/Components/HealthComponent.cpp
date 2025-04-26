@@ -81,7 +81,7 @@ void UHealthComponent::HandleDeath(FDamageInfo LastDamageInfo)
 
 void UHealthComponent::Die(FDamageInfo LastDamageInfo)
 {
-	LastDamageInfo.Value = 999999;
+	LastDamageInfo.Value = MaxHealth;
 	ApplyDamage(LastDamageInfo);
 }
 

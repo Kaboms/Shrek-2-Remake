@@ -129,6 +129,13 @@ void ACharacterBase::FellOutOfWorld(const UDamageType& dmgType)
 	HealthComponent->Die(DamageInfo);
 }
 
+void ACharacterBase::Jump()
+{
+	Super::Jump();
+
+	OnJump.Broadcast();
+}
+
 void ACharacterBase::OnPlayMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
 {
 	if (NotifyName == FName(TEXT("DeathEnded")))
@@ -150,19 +157,24 @@ void ACharacterBase::OnDamageReceived(UHealthComponent* InHealthComponent, FDama
 
 		FVector ImpactPoint = DamageInfo.DamageHit.Location;
 
+		FGameplayTagContainer DamageMontageTags;
 		if (!ImpactPoint.IsZero())
 		{
 			if (FVector::DotProduct(GetActorForwardVector(), UKismetMathLibrary::Normal(ImpactPoint - GetActorLocation())) >= 0)
 			{
-				DamageInfo.DamageIdentifier.AddTag(GameplayTagsNative::Damage_Direction_Front);
+				DamageMontageTags.AddTag(GameplayTagsNative::Damage_Direction_Front);
 			}
 			else
 			{
-				DamageInfo.DamageIdentifier.AddTag(GameplayTagsNative::Damage_Direction_Back);
+				DamageMontageTags.AddTag(GameplayTagsNative::Damage_Direction_Back);
 			}
 		}
+		if (bHasPickupItem)
+		{
+			DamageMontageTags.AddTag(GameplayTagsNative::Character_State_Carry);
+		}
 
-		UAnimMontage* MontageToPlay = FindTagedMontage(OnDamageMontages, DamageInfo.DamageIdentifier, DefaultDamageMontage);
+		UAnimMontage* MontageToPlay = FindTagedMontage(OnDamageMontages, DamageMontageTags, DefaultDamageMontage);
 
 		if (MontageToPlay)
 		{

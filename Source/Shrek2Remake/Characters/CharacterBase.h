@@ -21,6 +21,7 @@ enum class EWalkingSubMovementMode : uint8
 class UFightComponent;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FStunnedSignature, bool, IsStunned);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnJump);
 
 UCLASS()
 class SHREK2REMAKE_API ACharacterBase : public ACharacter, public IGameplayTagAssetInterface
@@ -64,6 +65,8 @@ public:
 
 	virtual void FellOutOfWorld(const class UDamageType& dmgType);
 
+	virtual void Jump() override;
+
 protected:
 	UFUNCTION()
 	void OnPlayMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload);
@@ -86,6 +89,9 @@ protected:
 public:
 	UPROPERTY(BlueprintAssignable, Category = "Event Dispatched")
 	FStunnedSignature OnStunned;
+
+	UPROPERTY(BlueprintAssignable, Category = "Event Dispatched")
+	FOnJump OnJump;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	FGameplayTagContainer CharacterTags;
