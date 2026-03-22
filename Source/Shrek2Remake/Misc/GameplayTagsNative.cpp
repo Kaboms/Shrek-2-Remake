@@ -1,4 +1,4 @@
-#include "Core/GameplayTagsNative.h"
+#include "Misc/GameplayTagsNative.h"
 
 namespace GameplayTagsNative
 {

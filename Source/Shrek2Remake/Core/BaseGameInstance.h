@@ -30,4 +30,9 @@ public:
 	/** Returns the game instance object  */
 	UFUNCTION(BlueprintPure, Category = "Game", meta = (WorldContext = "WorldContextObject", DeterminesOutputType = "GameInstanceClass"))
 	static class UBaseGameInstance* GetGameInstanceByClass(const UObject* WorldContextObject, TSubclassOf<UBaseGameInstance> GameInstanceClass);
+
+public:
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnLevelLoaded);
+	UPROPERTY(BlueprintAssignable, BlueprintCallable, EditDefaultsOnly, Category = "Event Dispatcher")
+	FOnLevelLoaded OnLevelLoaded;
 };

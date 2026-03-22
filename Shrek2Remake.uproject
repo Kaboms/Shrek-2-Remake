@@ -12,7 +12,8 @@
 				"Engine",
 				"CoreUObject",
 				"CommonUI",
-				"UMG"
+				"UMG",
+				"GameInstanceServices"
 			]
 		}
 	],

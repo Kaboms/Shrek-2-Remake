@@ -3,7 +3,7 @@
 
 #include "Characters/CharacterBase.h"
 #include "CombatComponent.h"
-#include "Core/GameplayTagsNative.h"
+#include "Misc/GameplayTagsNative.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 #include "Kismet/KismetMathLibrary.h"

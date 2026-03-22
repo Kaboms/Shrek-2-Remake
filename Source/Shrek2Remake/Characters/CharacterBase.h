@@ -7,7 +7,7 @@
 #include "Components/HealthComponent.h"
 #include "GameplayTagAssetInterface.h"
 
-#include "Core/TagedAnimMontage.h"
+#include "Misc/Structs/TagedAnimMontage.h"
 
 #include "CharacterBase.generated.h"
 

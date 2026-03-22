@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Core/ExtendedAssetManager.h"
-#include "Core/GameplayTagsNative.h"
+#include "Misc/ExtendedAssetManager.h"
+#include "Misc/GameplayTagsNative.h"
 
 void UExtendedAssetManager::StartInitialLoading()
 {
