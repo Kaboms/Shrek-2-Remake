@@ -8,9 +8,9 @@ bool UHelpersFunctionLibrary::IsWithEditor()
 {
 #if WITH_EDITOR 
     return true;
-#endif // WITH_EDITOR 
-
+#else
     return false;
+#endif // WITH_EDITOR 
 }
 
 bool UHelpersFunctionLibrary::DoesTargetMeetTagRequirements(const FGameplayTagRequirements& SourceTagReqs, const FGameplayTagContainer& TargetTags)
