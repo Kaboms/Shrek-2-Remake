@@ -19,6 +19,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Settings)
 	static UExtendedGameUserSettings* GetExtendedGameUserSettings();
 
+	virtual void ApplySettings(bool bCheckForCommandLineOverrides) override;
+
 	UFUNCTION(BlueprintCallable)
 	bool RunBenchmarkIfNeeded();
 

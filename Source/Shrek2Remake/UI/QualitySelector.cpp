@@ -7,7 +7,13 @@
 
 void UQualitySelector::InitDefaults(int32 QualityLevels, int32 CurrentQualityLevel)
 {
-	const TArray<FText> DefaultNames = TArray<FText>{ LOCTEXT("QualityLowLabel", "Low"), LOCTEXT("QualityMediumLabel", "Medium"), LOCTEXT("QualityHighLabel", "High"), LOCTEXT("QualityEpicLabel", "Epic"), LOCTEXT("QualityCineLabel", "Cinematic") };
+	const TArray<FText> DefaultNames = TArray<FText>{
+		LOCTEXT("QualityLowLabel", "Low"),
+		LOCTEXT("QualityMediumLabel", "Medium"),
+		LOCTEXT("QualityHighLabel", "High"),
+		LOCTEXT("QualityEpicLabel", "Epic"),
+		LOCTEXT("QualityCineLabel", "Cinematic")
+	};
 
 	Init(DefaultNames, QualityLevels, CurrentQualityLevel);
 }
