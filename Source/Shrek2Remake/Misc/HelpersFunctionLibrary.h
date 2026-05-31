@@ -21,4 +21,7 @@ public:
 
 	UFUNCTION(BlueprintPure)
 	static bool DoesTargetMeetTagRequirements(const FGameplayTagRequirements& SourceTagReqs, const FGameplayTagContainer& TargetTags);
+
+	UFUNCTION(BlueprintPure)
+	static FString GetAppVersion();
 };

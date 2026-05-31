@@ -4,9 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "Components/HealthComponent.h"
 #include "GameplayTagAssetInterface.h"
 
+#include "Components/HealthComponent.h"
+#include "Interfaces/PickupItem.h"
 #include "Misc/Structs/TagedAnimMontage.h"
 
 #include "CharacterBase.generated.h"
@@ -66,6 +67,9 @@ public:
 	virtual void FellOutOfWorld(const class UDamageType& dmgType);
 
 	virtual void Jump() override;
+
+	UFUNCTION(BlueprintPure)
+	TScriptInterface<IPickupItem> GetPickupedItem(bool& bIsValid);
 
 protected:
 	UFUNCTION()

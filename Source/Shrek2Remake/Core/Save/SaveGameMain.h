@@ -20,6 +20,9 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	FName Checkpoint;
+
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	FName Part;
 };
 
 UCLASS()

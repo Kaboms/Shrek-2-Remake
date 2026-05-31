@@ -17,3 +17,16 @@ bool UHelpersFunctionLibrary::DoesTargetMeetTagRequirements(const FGameplayTagRe
 {
     return SourceTagReqs.RequirementsMet(TargetTags);
 }
+
+FString UHelpersFunctionLibrary::GetAppVersion()
+{
+	FString AppVersion;
+	GConfig->GetString(
+		TEXT("/Script/EngineSettings.GeneralProjectSettings"),
+		TEXT("ProjectVersion"),
+		AppVersion,
+		GGameIni
+	);
+
+	return AppVersion;
+}

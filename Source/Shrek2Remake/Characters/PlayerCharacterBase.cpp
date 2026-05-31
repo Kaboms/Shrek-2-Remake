@@ -107,7 +107,7 @@ void APlayerCharacterBase::Attack()
 
 bool APlayerCharacterBase::CanAttack_Implementation() const
 {
-	return !bStunned && !bInAction && GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Walking
+	return !bHasPickupItem && !bStunned && !bInAction && GetCharacterMovement()->MovementMode == EMovementMode::MOVE_Walking
 		&& !GetMovementComponent()->IsFalling();
 		/*&& EWalkingSubMovementMode != EWalkingSubMovementMode::Wading original game has ability to attack in water, but this look weird*/
 }
@@ -243,7 +243,7 @@ void APlayerCharacterBase::RotateYawTo(FVector Point)
 
 bool APlayerCharacterBase::CanJumpInternal_Implementation() const
 {
-	if (GetIsAttack() || IsWading())
+	if (GetIsAttack() || IsWading() || bHasPickupItem)
 	{
 		return false;
 	}

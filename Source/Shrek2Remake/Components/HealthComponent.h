@@ -40,11 +40,6 @@ public:
 	// Sets default values for this component's properties
 	UHealthComponent();
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
@@ -72,9 +67,19 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Fall Damage")
 	void GrantNoFallDamage();
 
+protected:
+	// Called when the game starts
+	virtual void BeginPlay() override;
+
+	UFUNCTION()
+	void OnDamageTimeout();
+
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float MaxHealth = 100;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float DamageTimeout = 1.0f;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool bCanBeDamaged = true;
@@ -116,4 +121,8 @@ protected:
 	// If true next landing will be without fall damage
 	UPROPERTY(BlueprintReadWrite)
 	bool bNoFallDamageGranted = false;
+
+	UPROPERTY()
+	FTimerHandle DamageTimeoutTimer = FTimerHandle();
+
 };

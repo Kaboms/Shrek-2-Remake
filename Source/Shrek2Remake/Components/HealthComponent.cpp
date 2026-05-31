@@ -2,6 +2,7 @@
 
 
 #include "Components/HealthComponent.h"
+
 #include "GameFramework/Character.h"
 #include "PhysicalMaterials/PhysicalMaterial.h"
 
@@ -23,6 +24,11 @@ void UHealthComponent::BeginPlay()
 	{
 		OwnerCharacter->LandedDelegate.AddDynamic(this, &UHealthComponent::TryApplyFallDamage);
 	}
+}
+
+void UHealthComponent::OnDamageTimeout()
+{
+	DamageTimeoutTimer.Invalidate();
 }
 
 // Called every frame
@@ -49,6 +55,9 @@ void UHealthComponent::ApplyDamage(FDamageInfo DamageInfo)
 	if (!IsActive())
 		return;
 
+	if (DamageTimeoutTimer.IsValid())
+		return;
+
 	if (Health > 0 && bCanBeDamaged)
 	{
 		if (!bImmortal)
@@ -63,6 +72,7 @@ void UHealthComponent::ApplyDamage(FDamageInfo DamageInfo)
 		{
 			HandleDeath(DamageInfo);
 		}
+		GetWorld()->GetTimerManager().SetTimer(DamageTimeoutTimer, this, &ThisClass::OnDamageTimeout, DamageTimeout);
 	}
 }
 

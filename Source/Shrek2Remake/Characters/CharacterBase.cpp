@@ -136,6 +136,20 @@ void ACharacterBase::Jump()
 	OnJump.Broadcast();
 }
 
+TScriptInterface<IPickupItem> ACharacterBase::GetPickupedItem(bool& bIsValid)
+{
+	if (IsValid(PickupedItem))
+	{
+		if (PickupedItem->Implements<UPickupItem>())
+		{
+			bIsValid = true;
+			return TScriptInterface<IPickupItem>(PickupedItem);
+		}
+	}
+	bIsValid = false;
+	return nullptr;
+}
+
 void ACharacterBase::OnPlayMontageNotifyBegin(FName NotifyName, const FBranchingPointNotifyPayload& BranchingPointPayload)
 {
 	if (NotifyName == FName(TEXT("DeathEnded")))
