@@ -132,3 +132,15 @@ void UHealthComponent::GrantNoFallDamage()
 	bNoFallDamageGranted = true;
 }
 
+void UHealthComponent::AddHealthLevel()
+{
+	SetHealthLevel(HealthLevel + 1);
+}
+
+void UHealthComponent::SetHealthLevel(int32 NewHealthLevel)
+{
+	HealthLevel = NewHealthLevel;
+
+	SetMaxHealth(MaxHealth + HealthLevel * AddHealthPerLevel);
+}
+

@@ -9,6 +9,8 @@
 
 #include "SaveGameMain.generated.h"
 
+class APlayerCharacterBase;
+
 USTRUCT(BlueprintType)
 struct FLevelSave : public FTableRowBase
 {
@@ -38,5 +40,11 @@ public:
 	TSet<FGuid> DestroyedActors;
 
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
-	int32 Coins;
+	int32 Coins = 0;
+
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	int32 HealthLevel = 0;
+
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	TSubclassOf<APlayerCharacterBase> PlayerClass;
 };

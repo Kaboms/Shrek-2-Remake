@@ -67,6 +67,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Fall Damage")
 	void GrantNoFallDamage();
 
+	UFUNCTION(BlueprintCallable)
+	void AddHealthLevel();
+
+	UFUNCTION(BlueprintCallable)
+	void SetHealthLevel(int32 NewHealthLevel = 1);
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -77,6 +83,12 @@ protected:
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float MaxHealth = 100;
+
+	UPROPERTY(BlueprintReadOnly)
+	int32 HealthLevel = 0;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	float AddHealthPerLevel = 25;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float DamageTimeout = 1.0f;
