@@ -17,7 +17,8 @@ public class Shrek2Remake : ModuleRules
             "ClimbingSystem",
             "GameInstanceServices",
             "CombatSystem",
-            "UIGoodies"
+            "UIGoodies",
+            "InventorySystem"
         });
 
         PrivateDependencyModuleNames.AddRange(new string[]

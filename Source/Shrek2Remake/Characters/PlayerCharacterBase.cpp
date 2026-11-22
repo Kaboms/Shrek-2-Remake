@@ -84,6 +84,11 @@ void APlayerCharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInpu
 		//Attack/Use
 		EnhancedInputComponent->BindAction(InputConfig->AttackUseInputAction, ETriggerEvent::Started, this, &APlayerCharacterBase::AttackUse);
 	}
+
+	if (IsValid(ClimbingComponent))
+	{
+		ClimbingComponent->SetupInputComponent();
+	}
 }
 
 void APlayerCharacterBase::PostInitializeComponents()

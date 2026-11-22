@@ -6,6 +6,7 @@
 #include "GameFramework/SaveGame.h"
 
 #include "Misc/Structs/LevelInfo.h"
+#include "Inventory/ItemData.h"
 
 #include "SaveGameMain.generated.h"
 
@@ -47,4 +48,10 @@ public:
 
 	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
 	TSubclassOf<APlayerCharacterBase> PlayerClass;
+
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	TArray<UItemData*> Posters;
+
+	UPROPERTY(BlueprintReadWrite, EditDefaultsOnly)
+	TMap<UItemData*, int32> Potions;
 };
